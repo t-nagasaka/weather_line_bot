@@ -15,7 +15,7 @@ class LinebotController < ApplicationController
     end
 
     events = client.parse_events_from(body)
-    url = "https://api.openweathermap.org/data/2.5/onecall?lat=33.441792&lon=-94.037689&exclude=hourly,minutely&appid=#{API_KEY}"
+    url = "https://api.openweathermap.org/data/2.5/onecall?lat=33.441792&lon=-94.037689&exclude=hourly,minutely&appid=#{ENV["API_KEY"]}"
     row_data = open(url)
     wx_text = ""
 
