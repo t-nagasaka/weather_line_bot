@@ -25,7 +25,7 @@ task update_feed: :environment do
   temp_max = (wx_data["main"]["temp_max"] - 273.15).round(1)
   temp_min = (wx_data["main"]["temp_min"] - 273.15).round(1)
   humidity = wx_data["main"]["humidity"]
-  aphorism = CSV.read("comment.csv").sample
+  aphorism = CSV.read("db/CSV_file/comment.csv").sample
   current_day = ""
 
   CSV.foreach("db/CSV_file/OWM_weather_id.csv", headers: true) do |row|
