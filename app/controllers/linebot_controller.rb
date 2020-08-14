@@ -20,8 +20,6 @@ class LinebotController < ApplicationController
     row_data = open(url)
     wx_text = ""
 
-    puts events
-
     events.each do |event|
       case event
       when Line::Bot::Event::Message
@@ -155,6 +153,8 @@ class LinebotController < ApplicationController
                 TEXT
               end
             end
+          else
+            wx_text = "指定の数字以外は理解しかねますが？"
           end
         else
           wx_text = "指定の数字以外は理解しかねますが？"
