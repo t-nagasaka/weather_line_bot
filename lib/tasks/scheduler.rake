@@ -29,7 +29,7 @@ task update_feed: :environment do
   aphorism = CSV.read("comment.csv").sample
   current_day = ""
 
-  CSV.foreach("OWM_weather_id.csv", headers: true) do |row|
+  CSV.foreach("db/CSV_file/OWM_weather_id.csv", headers: true) do |row|
     if row["ID"].to_i == wx_id
       current_day = <<~TEXT
         今日の天気をお知らせします！
@@ -47,7 +47,7 @@ task update_feed: :environment do
       TEXT
     end
     user_ids = User.all.pluck(:line_id)
-    message = { type: "text", text: current_day }
+    message = { type: "text", text: current_day.chomp! }
     response = client.multicast(user_ids, message)
   end
   "OK"

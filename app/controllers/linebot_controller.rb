@@ -161,7 +161,7 @@ class LinebotController < ApplicationController
         end
         message = {
           type: "text",
-          text: wx_text,
+          text: wx_text.chomp!,
         }
         client.reply_message(event["replyToken"], message)
       when Line::Bot::Event::Follow
