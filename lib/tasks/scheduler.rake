@@ -3,7 +3,6 @@ task update_feed: :environment do
   require "line/bot"
   require "open-uri"
   require "kconv"
-  require "pry"
   require "csv"
 
   client ||= Line::Bot::Client.new { |config|
@@ -45,9 +44,10 @@ task update_feed: :environment do
         7日先までなら返信してくれれば追加で教えます！
         例：3日後の天気が知りたければ「３」
       TEXT
+      current_day = current_day.chomp!
     end
     user_ids = User.all.pluck(:line_id)
-    message = { type: "text", text: current_day.chomp! }
+    message = { type: "text", text: current_day }
     response = client.multicast(user_ids, message)
   end
   "OK"
