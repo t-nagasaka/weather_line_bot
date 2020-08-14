@@ -1,6 +1,6 @@
 class LinebotController < ApplicationController
   require "line/bot"
-  require "open/uri"
+  require "open-uri"
   require "kconv"
   require "rexml/document"
   require "csv"
