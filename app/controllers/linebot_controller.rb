@@ -27,7 +27,7 @@ class LinebotController < ApplicationController
         when Line::Bot::Event::MessageType::Text
           input = event.message["text"]
           case input
-          when /.*(1).*/
+          when 1
             weekly_data = JSON.parse(row_data.read)
             forecast = weekly_data["daily"][1]
             wx_condition = forecast["weather"][0]["id"]
