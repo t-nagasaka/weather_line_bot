@@ -26,15 +26,15 @@ class LinebotController < ApplicationController
         case event.type
         when Line::Bot::Event::MessageType::Text
           input = event.message["text"]
-          case input.to_s
-          when "1"
+          case input
+          when /.*(1).*/
             weekly_data = JSON.parse(row_data.read)
             forecast = weekly_data["daily"][1]
             wx_condition = forecast["weather"][0]["id"]
             temp_max = (forecast["temp"]["max"] - 273.15).round(1)
             temp_min = (forecast["temp"]["min"] - 273.15).round(1)
             humidity = forecast["humidity"]
-            CSV.foreach("OWM_weather_id.csv", headers: true) do |row|
+            CSV.foreach("/Users/nagasakataichi/portfolio/weather_line_bot/app/models/OWM_weather_id.csv", headers: true) do |row|
               if row["ID"].to_i == wx_condition
                 wx_text = <<~TEXT
                   明日の天気をお知らせします！
