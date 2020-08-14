@@ -17,7 +17,7 @@ task update_feed: :environment do
   city_id = "1856057"
   BASE_URL = "http://api.openweathermap.org/data/2.5/weather"
 
-  row_data = open(BASE_URL + "?id=#{city_id}&APPID=#{API_KEY}")
+  row_data = open(BASE_URL + "?id=#{city_id}&APPID=#{ENV["API_KEY"]}")
   wx_data = JSON.parse(row_data.read)
 
   location = wx_data["name"]
