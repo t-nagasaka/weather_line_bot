@@ -4,27 +4,27 @@ class LinebotController < ApplicationController
   require "kconv"
   require "rexml/document"
   require "csv"
-  
+
   protect_from_forgery except: :callback
-  
+
   def callback
     body = request.body.read
     signature = request.env["HTTP_X_LINE_SIGNATURE"]
     unless client.validate_signature(body, signature)
       error 400 do "Bad Request" end
     end
-      
+
     events = client.parse_events_from(body)
     url = "https://api.openweathermap.org/data/2.5/onecall?lat=33.441792&lon=-94.037689&exclude=hourly,minutely&appid=#{API_KEY}"
     row_data = open(url)
     wx_text = ""
-    
+
     events.each do |event|
       case event.type
       when Line::Bot::Event::Message
         case event.type
         when Line::Bot::Event::MessageType::Text
-        input = event.message["text"]
+          input = event.message["text"]
           case input
           when /.*(1).*/
             weekly_data = JSON.parse(row_data.read)
@@ -157,24 +157,25 @@ class LinebotController < ApplicationController
           wx_text = "指定の数字以外は理解しかねますが？"
         end
         message = {
-        type: 'text',
-        text: wx_text
+          type: "text",
+          text: wx_text,
         }
-        client.reply_message(event['replyToken'],message)
+        client.reply_message(event["replyToken"], message)
       when Line::Bot::Event::Follow
-        line_id = event['source']['userID']
+        line_id = event["source"]["userID"]
         User.create(line_id: line_id)
       when Line::Bot::Event::Unfollow
-        line_id = event['source']['userID']
+        line_id = event["source"]["userID"]
         User.create(line_id: line_id).destroy
       end
+    end
     head :ok
   end
 
   private
 
   def client
-    @client ||= Line::Bot::Client.new{ |config|
+    @client ||= Line::Bot::Client.new { |config|
       config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
       config.channel_token = ENV["LINE_CHANNEL_TOKEN"]
     }
