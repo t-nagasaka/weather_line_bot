@@ -34,7 +34,7 @@ class LinebotController < ApplicationController
             temp_max = (forecast["temp"]["max"] - 273.15).round(1)
             temp_min = (forecast["temp"]["min"] - 273.15).round(1)
             humidity = forecast["humidity"]
-            CSV.foreach("/Users/nagasakataichi/portfolio/weather_line_bot/app/models/OWM_weather_id.csv", headers: true) do |row|
+            CSV.foreach("db/CSV_file/OWM_weather_id.csv", headers: true) do |row|
               if row["ID"].to_i == wx_condition
                 wx_text = <<~TEXT
                   明日の天気をお知らせします！
@@ -52,7 +52,7 @@ class LinebotController < ApplicationController
             temp_max = (forecast["temp"]["max"] - 273.15).round(1)
             temp_min = (forecast["temp"]["min"] - 273.15).round(1)
             humidity = forecast["humidity"]
-            CSV.foreach("OWM_weather_id.csv", headers: true) do |row|
+            CSV.foreach("db/CSV_file/OWM_weather_id.csv", headers: true) do |row|
               if row["ID"].to_i == wx_condition
                 wx_text = <<~TEXT
                   明後日の天気をお知らせします！
@@ -70,7 +70,7 @@ class LinebotController < ApplicationController
             temp_max = (forecast["temp"]["max"] - 273.15).round(1)
             temp_min = (forecast["temp"]["min"] - 273.15).round(1)
             humidity = forecast["humidity"]
-            CSV.foreach("OWM_weather_id.csv", headers: true) do |row|
+            CSV.foreach("db/CSV_file/OWM_weather_id.csv", headers: true) do |row|
               if row["ID"].to_i == wx_condition
                 wx_text = <<~TEXT
                   3日後の天気をお知らせします！
@@ -88,7 +88,7 @@ class LinebotController < ApplicationController
             temp_max = (forecast["temp"]["max"] - 273.15).round(1)
             temp_min = (forecast["temp"]["min"] - 273.15).round(1)
             humidity = forecast["humidity"]
-            CSV.foreach("OWM_weather_id.csv", headers: true) do |row|
+            CSV.foreach("db/CSV_file/OWM_weather_id.csv", headers: true) do |row|
               if row["ID"].to_i == wx_condition
                 wx_text = <<~TEXT
                   4日後の天気をお知らせします！
@@ -106,7 +106,7 @@ class LinebotController < ApplicationController
             temp_max = (forecast["temp"]["max"] - 273.15).round(1)
             temp_min = (forecast["temp"]["min"] - 273.15).round(1)
             humidity = forecast["humidity"]
-            CSV.foreach("OWM_weather_id.csv", headers: true) do |row|
+            CSV.foreach("db/CSV_file/OWM_weather_id.csv", headers: true) do |row|
               if row["ID"].to_i == wx_condition
                 wx_text = <<~TEXT
                   5日後の天気をお知らせします！
@@ -124,7 +124,7 @@ class LinebotController < ApplicationController
             temp_max = (forecast["temp"]["max"] - 273.15).round(1)
             temp_min = (forecast["temp"]["min"] - 273.15).round(1)
             humidity = forecast["humidity"]
-            CSV.foreach("OWM_weather_id.csv", headers: true) do |row|
+            CSV.foreach("db/CSV_file/OWM_weather_id.csv", headers: true) do |row|
               if row["ID"].to_i == wx_condition
                 wx_text = <<~TEXT
                   6日後の天気をお知らせします！
@@ -142,7 +142,7 @@ class LinebotController < ApplicationController
             temp_max = (forecast["temp"]["max"] - 273.15).round(1)
             temp_min = (forecast["temp"]["min"] - 273.15).round(1)
             humidity = forecast["humidity"]
-            CSV.foreach("OWM_weather_id.csv", headers: true) do |row|
+            CSV.foreach("db/CSV_file/OWM_weather_id.csv", headers: true) do |row|
               if row["ID"].to_i == wx_condition
                 wx_text = <<~TEXT
                   7日後の天気をお知らせします！
