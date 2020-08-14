@@ -43,6 +43,7 @@ class LinebotController < ApplicationController
                   最低気温：#{temp_min} ℃
                   湿度：#{humidity} %
                 TEXT
+                wx_text = wx_text.chomp!
               end
             end
           when /.*(2).*/
@@ -61,6 +62,7 @@ class LinebotController < ApplicationController
                   最低気温：#{temp_min} ℃
                   湿度：#{humidity} %
                 TEXT
+                wx_text = wx_text.chomp!
               end
             end
           when /.*(3).*/
@@ -79,6 +81,7 @@ class LinebotController < ApplicationController
                   最低気温：#{temp_min} ℃
                   湿度：#{humidity} %
                 TEXT
+                wx_text = wx_text.chomp!
               end
             end
           when /.*(4).*/
@@ -97,6 +100,7 @@ class LinebotController < ApplicationController
                   最低気温：#{temp_min} ℃
                   湿度：#{humidity} %
                 TEXT
+                wx_text = wx_text.chomp!
               end
             end
           when /.*(5).*/
@@ -115,6 +119,7 @@ class LinebotController < ApplicationController
                   最低気温：#{temp_min} ℃
                   湿度：#{humidity} %
                 TEXT
+                wx_text = wx_text.chomp!
               end
             end
           when /.*(6).*/
@@ -133,6 +138,7 @@ class LinebotController < ApplicationController
                   最低気温：#{temp_min} ℃
                   湿度：#{humidity} %
                 TEXT
+                wx_text = wx_text.chomp!
               end
             end
           when /.*(7).*/
@@ -151,6 +157,7 @@ class LinebotController < ApplicationController
                   最低気温：#{temp_min} ℃
                   湿度：#{humidity} %
                 TEXT
+                wx_text = wx_text.chomp!
               end
             end
           else
@@ -161,7 +168,7 @@ class LinebotController < ApplicationController
         end
         message = {
           type: "text",
-          text: wx_text.chomp!,
+          text: wx_text,
         }
         client.reply_message(event["replyToken"], message)
       when Line::Bot::Event::Follow
