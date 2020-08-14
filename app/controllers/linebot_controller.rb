@@ -20,6 +20,8 @@ class LinebotController < ApplicationController
     row_data = open(url)
     wx_text = ""
 
+    puts events
+
     events.each do |event|
       case event
       when Line::Bot::Event::Message
