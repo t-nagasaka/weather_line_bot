@@ -21,7 +21,7 @@ class LinebotController < ApplicationController
     wx_text = ""
 
     events.each do |event|
-      case event.type
+      case event
       when Line::Bot::Event::Message
         case event.type
         when Line::Bot::Event::MessageType::Text
@@ -159,7 +159,7 @@ class LinebotController < ApplicationController
         end
         message = {
           type: "text",
-          text: "ああああ",
+          text: wx_text,
         }
         client.reply_message(event["replyToken"], message)
       when Line::Bot::Event::Follow
