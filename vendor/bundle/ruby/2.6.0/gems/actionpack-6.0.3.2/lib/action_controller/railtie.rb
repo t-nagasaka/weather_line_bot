@@ -37,17 +37,17 @@ module ActionController
     end
 
     initializer "action_controller.set_configs" do |app|
-      paths   = app.config.paths
+      paths = app.config.paths
       options = app.config.action_controller
 
-      options.logger      ||= Rails.logger
+      options.logger ||= Rails.logger
       options.cache_store ||= Rails.cache
 
       options.javascripts_dir ||= paths["public/javascripts"].first
       options.stylesheets_dir ||= paths["public/stylesheets"].first
 
       # Ensure readers methods get compiled.
-      options.asset_host        ||= app.config.asset_host
+      options.asset_host ||= app.config.asset_host
       options.relative_url_root ||= app.config.relative_url_root
 
       ActiveSupport.on_load(:action_controller) do
