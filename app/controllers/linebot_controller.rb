@@ -14,7 +14,7 @@ class LinebotController < ApplicationController
       error 400 do "Bad Request" end
     end
 
-    events = client.parse_events_from(body)
+    p events = client.parse_events_from(body)
     owa_token = ENV["OWA_TOKEN"]
     url = "https://api.openweathermap.org/data/2.5/onecall?lat=33.441792&lon=-94.037689&exclude=hourly,minutely&appid=#{owa_token}"
     row_data = open(url)
