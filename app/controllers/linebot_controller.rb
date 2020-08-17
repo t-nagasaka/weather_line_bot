@@ -25,12 +25,16 @@ class LinebotController < ApplicationController
       p event.class
       p event
       puts "------------------------------------------------------------------------------"
-      p event === Line::Bot::Event::Follow
-      p event === Line::Bot::Event::Unfollow
-      p event === Line::Bot::Event::Message
-      puts "------------------------------------------------------------------------------"
-      p Line::Bot::Event::Follow === event
-      p Line::Bot::Event::Unfollow === event
+      if Line::Bot::Event::Follow === event
+        puts "follow"
+        p line_id = event["source"]["userId"]
+        User.create!(line_id: line_id)
+      end
+      if Line::Bot::Event::Unfollow === event
+        puts "unfollow"
+        p line_id = event["source"]["userId"]
+        User.find_by(line_id: line_id).destroy
+      end
       p Line::Bot::Event::Message === event
       puts "------------------------------------------------------------------------------"
       p event&.type&.class
