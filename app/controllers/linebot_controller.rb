@@ -21,10 +21,6 @@ class LinebotController < ApplicationController
     wx_text = ""
 
     events.each do |event|
-      puts "=============================================================================="
-      p event.class
-      p event
-      puts "------------------------------------------------------------------------------"
       if Line::Bot::Event::Follow === event
         puts "follow"
         p line_id = event["source"]["userId"]
@@ -35,11 +31,6 @@ class LinebotController < ApplicationController
         p line_id = event["source"]["userId"]
         User.find_by(line_id: line_id).destroy
       end
-      p Line::Bot::Event::Message === event
-      puts "------------------------------------------------------------------------------"
-      p event&.type&.class
-      p event&.type
-      puts "=============================================================================="
       case event
       when Line::Bot::Event::Follow
         puts "follow"
