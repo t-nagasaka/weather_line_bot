@@ -46,9 +46,9 @@ task update_feed: :environment do
         例：3日後の天気が知りたければ「３」
       TEXT
       current_day = current_day.chomp!
+      message = { type: "text", text: current_day }
+      response = client.multicast(user_ids, message)
     end
-    p message = { type: "text", text: current_day }
-    response = client.multicast(user_ids, message)
   end
   "OK"
 end
