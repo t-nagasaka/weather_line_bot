@@ -163,12 +163,6 @@ class LinebotController < ApplicationController
           else
             wx_text = "指定の数字以外は理解しかねますが？"
           end
-        when Line::Bot::Event::Follow
-          line_id = event["source"]["userID"]
-          User.create(line_id: line_id)
-        when Line::Bot::Event::Unfollow
-          line_id = event["source"]["userID"]
-          User.find_by(line_id: line_id).destroy
         else
           wx_text = "指定の数字以外は理解しかねますが？"
         end
@@ -177,6 +171,12 @@ class LinebotController < ApplicationController
           text: wx_text,
         }
         client.reply_message(event["replyToken"], message)
+      when Line::Bot::Event::Follow
+        line_id = event["source"]["userID"]
+        User.create(line_id: line_id)
+      when Line::Bot::Event::Unfollow
+        line_id = event["source"]["userID"]
+        User.find_by(line_id: line_id).destroy
       end
     end
     head :ok
