@@ -27,6 +27,7 @@ task update_feed: :environment do
   humidity = wx_data["main"]["humidity"]
   aphorism = CSV.read("db/CSV_file/comment.csv").sample
   current_day = ""
+  user_ids = User.all.pluck(:line_id)
 
   CSV.foreach("db/CSV_file/OWM_weather_id.csv", headers: true) do |row|
     if row["ID"].to_i == wx_id
@@ -46,8 +47,7 @@ task update_feed: :environment do
       TEXT
       current_day = current_day.chomp!
     end
-    user_ids = User.all.pluck(:line_id)
-    message = { type: "text", text: current_day }
+    p message = { type: "text", text: current_day }
     response = client.multicast(user_ids, message)
   end
   "OK"
