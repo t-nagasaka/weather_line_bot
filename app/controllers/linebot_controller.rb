@@ -14,13 +14,20 @@ class LinebotController < ApplicationController
       error 400 do "Bad Request" end
     end
 
-    p events = client.parse_events_from(body)
+    events = client.parse_events_from(body)
     owa_token = ENV["OWA_TOKEN"]
     url = "https://api.openweathermap.org/data/2.5/onecall?lat=33.441792&lon=-94.037689&exclude=hourly,minutely&appid=#{owa_token}"
     row_data = open(url)
     wx_text = ""
 
     events.each do |event|
+      puts "=============================================================================="
+      p event.class
+      p event
+      puts "------------------------------------------------------------------------------"
+      p event&.type&.class
+      p event&.type
+      puts "=============================================================================="
       case event
       when Line::Bot::Event::Message
         case event.type
