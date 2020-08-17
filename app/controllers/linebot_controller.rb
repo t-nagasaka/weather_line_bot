@@ -168,7 +168,7 @@ class LinebotController < ApplicationController
           User.create(line_id: line_id)
         when Line::Bot::Event::Unfollow
           line_id = event["source"]["userID"]
-          User.create(line_id: line_id).destroy
+          User.find_by(line_id: line_id).destroy
         else
           wx_text = "指定の数字以外は理解しかねますが？"
         end
