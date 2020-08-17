@@ -24,9 +24,14 @@ class LinebotController < ApplicationController
       puts "=============================================================================="
       p event.class
       p event
+      puts "------------------------------------------------------------------------------"
       p event === Line::Bot::Event::Follow
-      p event === Line::Bot::Event::UnFollow
+      p event === Line::Bot::Event::Unfollow
       p event === Line::Bot::Event::Message
+      puts "------------------------------------------------------------------------------"
+      p Line::Bot::Event::Follow === event
+      p Line::Bot::Event::Unfollow === event
+      p Line::Bot::Event::Message === event
       puts "------------------------------------------------------------------------------"
       p event&.type&.class
       p event&.type
