@@ -173,7 +173,7 @@ class LinebotController < ApplicationController
         client.reply_message(event["replyToken"], message)
       when Line::Bot::Event::Follow
         line_id = event["source"]["userID"]
-        User.create(line_id: line_id)
+        User.create!(line_id: line_id)
       when Line::Bot::Event::Unfollow
         line_id = event["source"]["userID"]
         User.find_by(line_id: line_id).destroy
